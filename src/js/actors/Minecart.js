@@ -1,6 +1,6 @@
 import { Actor, CollisionType, Keys } from "excalibur";
 import { Resources } from "../resources.js";
-import { Rock } from "../world/Rock.js"; // <-- ADD THIS IMPORT
+import { Rock } from "../world/Rock.js";
 
 export class Minecart extends Actor {
   constructor(x, y) {
@@ -13,7 +13,7 @@ export class Minecart extends Actor {
     });
 
     this.jumpForce = -600;
-    this.forwardSpeed = 200;
+    this.forwardSpeed = 300;
   }
 
   onInitialize(engine) {
@@ -22,21 +22,19 @@ export class Minecart extends Actor {
 
     console.log("Minecart collisionType:", this.body.collisionType);
 
-    this.on("collisionstart", (evt) => {
-      console.log("collisionstart event:", evt);
-      console.log("other:", evt.other);
+this.on("collisionstart", (evt) => {
+  const otherActor = evt.other.owner ?? evt.other;
 
-      const otherActor = evt.other.owner ?? evt.other;
-      console.log("otherActor.name:", otherActor.name);
-
-      if (otherActor.name === "rock") {
-        engine.goToScene("gameover");
-        console.log("Jaa");
-      }
-    });
+  if (otherActor.name === "rock") {
+    engine.currentScene.scoreUI.gameOver();
+    engine.goToScene("gameover");
+  }
+});
   }
 
   onPreUpdate(engine) {
+    this.forwardSpeed += 0.05;
+
     this.vel.x = this.forwardSpeed;
 
     const jumpPressed = engine.input.keyboard.wasPressed(Keys.Space);

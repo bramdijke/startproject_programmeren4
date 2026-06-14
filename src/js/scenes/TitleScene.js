@@ -10,7 +10,7 @@ export class TitleScene extends Scene {
         size: 64,
         color: Color.White,
         bold: true,
-        textAlign: "center", // Centers the text exactly on the position
+        textAlign: "center",
       }),
     });
     this.add(titleLabel);

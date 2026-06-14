@@ -7,6 +7,7 @@ const Resources = {
   Minecart: new ImageSource("/images/minecart.png"),
   Background: new ImageSource("/images/cavebg.png"),
   Rock: new ImageSource("./images/rock.png"),
+  Bat: new ImageSource("./images/bat.png"),
 
   BackgroundMusic: new Sound("./audio/minecart-song.mp3"),
   JumpSound: new Sound("./audio/jump.mp3"),

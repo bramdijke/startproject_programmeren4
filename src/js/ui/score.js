@@ -7,34 +7,38 @@ export class Score extends Label {
       pos: new Vector(x, y),
       font: new Font({
         family: "'Press Start 2P', cursive",
-        size: 20, // You might need to lower the size, pixel fonts are usually big!
+        size: 20,
         color: Color.White,
         bold: true,
       }),
-      z: 100, // Ensures it renders on top of the backgrounds and tracks
+      z: 100,
     });
 
-    // CRITICAL: This locks the UI to the screen so the camera doesn't leave it behind
     this.transform.coordPlane = CoordPlane.Screen;
 
     this.currentScore = 0;
     this.isAlive = true;
+
+    // Load high score from localStorage (defaults to 0 if none saved)
+    this.highScore = Number(localStorage.getItem("highScore")) || 0;
   }
 
   onPreUpdate(engine, delta) {
     if (this.isAlive) {
-      // 'delta' is the time in milliseconds since the last frame.
-      // Multiplying by 0.01 roughly gives you 10 points per second.
-      // Increase this multiplier if you want the score to go up faster!
       this.currentScore += delta * 0.01;
 
-      // Update the label text with a nice, rounded whole number
-      this.text = `Score: ${Math.floor(this.currentScore)}`;
+      this.text = `Score: ${Math.floor(this.currentScore)} | High Score: ${Math.floor(this.highScore)}`;
     }
   }
 
-  // You can call this method later when the cart hits an obstacle
+  // Call this when the cart hits an obstacle
   gameOver() {
     this.isAlive = false;
+
+    // Check and save new high score
+    if (this.currentScore > this.highScore) {
+      this.highScore = this.currentScore;
+      localStorage.setItem("highScore", Math.floor(this.highScore));
+    }
   }
 }

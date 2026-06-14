@@ -1,28 +1,18 @@
-import { Actor, CollisionType, Color, vec } from "excalibur";
+import { CollisionType, vec } from "excalibur";
 import { Resources } from "../resources";
-export class Rock extends Actor {
+import { Enemy } from "./Enemy.js";
+
+export class Rock extends Enemy {
   constructor(x, y) {
     super({
       name: "rock",
-      pos: vec(x, y - 64),
+      x: x,
+      y: y - 64,
       width: 64,
       height: 64,
       collisionType: CollisionType.Fixed,
     });
-  }
 
-  onInitialize(engine) {
-    // 1. Convert your image resource into a usable sprite
-    const rockSprite = Resources.Rock.toSprite();
-
-    // 2. Set the graphics to use your new sprite
-    this.graphics.use(rockSprite);
-
-    // OPTIONAL: If the original image file is way too big (like 500x500 pixels),
-    // this line forces the image to shrink down to perfectly fit your 64x64 hitbox!
-    this.graphics.current.scale = vec(
-      this.width / rockSprite.width,
-      this.height / rockSprite.height,
-    );
+    this.sprite = Resources.Rock.toSprite();
   }
 }
