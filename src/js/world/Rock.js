@@ -3,8 +3,7 @@ import { Resources } from "../resources";
 export class Rock extends Actor {
   constructor(x, y) {
     super({
-      // We subtract from the Y position so the rock sits ON TOP of the rail,
-      // instead of clipping directly inside the middle of it.
+      name: "rock",
       pos: vec(x, y - 64),
       width: 64,
       height: 64,

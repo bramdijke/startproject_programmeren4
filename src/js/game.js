@@ -17,12 +17,10 @@ export class Game extends Engine {
       },
     });
 
-    // 1. Register our Scenes with the engine
     this.addScene("title", new TitleScene());
     this.addScene("level", new LevelScene());
     this.addScene("gameover", new GameOverScene());
 
-    // 2. Start loading resources, then go to the Title screen
     this.start(ResourceLoader).then(() => {
       this.goToScene("title");
     });

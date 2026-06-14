@@ -10,7 +10,6 @@ const Resources = {
 
   BackgroundMusic: new Sound("./audio/minecart-song.mp3"),
   JumpSound: new Sound("./audio/jump.mp3"),
-
 };
 
 const ResourceLoader = new Loader();
