@@ -22,14 +22,14 @@ export class Minecart extends Actor {
 
     console.log("Minecart collisionType:", this.body.collisionType);
 
-this.on("collisionstart", (evt) => {
-  const otherActor = evt.other.owner ?? evt.other;
+    this.on("collisionstart", (evt) => {
+      const otherActor = evt.other.owner ?? evt.other;
 
-  if (otherActor.name === "rock") {
-    engine.currentScene.scoreUI.gameOver();
-    engine.goToScene("gameover");
-  }
-});
+      if (otherActor.name === "rock") {
+        engine.currentScene.scoreUI.gameOver();
+        engine.goToScene("gameover");
+      }
+    });
   }
 
   onPreUpdate(engine) {
